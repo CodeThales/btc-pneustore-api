@@ -21,25 +21,25 @@ namespace Equipe2_PneuStore.Controllers
 
         /// <summary>
         /// Returns the list of categories registered in the database.
+        /// Must be logged in and with valid token.
         /// </summary>
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [Authorize]
         [HttpGet]
         public IActionResult Index() => ApiOk(_service.All());
 
         /// <summary>
         /// Returns the searched category according to the id informed.
+        /// Must be logged in and with valid token.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [Authorize]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]      
         [HttpGet]
         [Route("{id}")]
         public IActionResult Index(int? id) => ApiOk(_service.Get(id));
+
+        //Teste Commit
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Equipe2_PneuStore.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210930232831_1")]
-    partial class _1
+    [Migration("20211014010520_2")]
+    partial class _2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,84 +20,6 @@ namespace Equipe2_PneuStore.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("AddressClient", b =>
-                {
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AddressId", "ClientId");
-
-                    b.HasIndex("ClientId");
-
-                    b.ToTable("AddressClient");
-                });
-
-            modelBuilder.Entity("AddressPartner", b =>
-                {
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PartnerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AddressId", "PartnerId");
-
-                    b.HasIndex("PartnerId");
-
-                    b.ToTable("AddressPartner");
-                });
-
-            modelBuilder.Entity("CategoryTyre", b =>
-                {
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TyreId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CategoryId", "TyreId");
-
-                    b.HasIndex("TyreId");
-
-                    b.ToTable("CategoryTyre");
-                });
-
-            modelBuilder.Entity("Equipe2_PneuStore.Models.Address", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Neighborhood")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Number1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Number2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Street")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ZipCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Address");
-                });
 
             modelBuilder.Entity("Equipe2_PneuStore.Models.Category", b =>
                 {
@@ -109,7 +31,12 @@ namespace Equipe2_PneuStore.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TyreId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TyreId");
 
                     b.ToTable("Category");
                 });
@@ -121,8 +48,11 @@ namespace Equipe2_PneuStore.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
+                    b.Property<string>("Address1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Address2")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
@@ -131,11 +61,21 @@ namespace Equipe2_PneuStore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -150,13 +90,32 @@ namespace Equipe2_PneuStore.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
+                    b.Property<string>("Address1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Address2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Note")
+                        .HasColumnType("int");
+
                     b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -394,49 +353,11 @@ namespace Equipe2_PneuStore.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("AddressClient", b =>
+            modelBuilder.Entity("Equipe2_PneuStore.Models.Category", b =>
                 {
-                    b.HasOne("Equipe2_PneuStore.Models.Address", null)
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Equipe2_PneuStore.Models.Client", null)
-                        .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AddressPartner", b =>
-                {
-                    b.HasOne("Equipe2_PneuStore.Models.Address", null)
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Equipe2_PneuStore.Models.Partner", null)
-                        .WithMany()
-                        .HasForeignKey("PartnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CategoryTyre", b =>
-                {
-                    b.HasOne("Equipe2_PneuStore.Models.Category", null)
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Equipe2_PneuStore.Models.Tyre", null)
-                        .WithMany()
-                        .HasForeignKey("TyreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Category")
+                        .HasForeignKey("TyreId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -488,6 +409,11 @@ namespace Equipe2_PneuStore.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Equipe2_PneuStore.Models.Tyre", b =>
+                {
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }
