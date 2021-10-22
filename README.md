@@ -95,7 +95,7 @@ Basta seguir o mesmo passo informado do download do back-end, através deste rep
 
         https://github.com/vitorlombardi/PneuStore-BTC
 
-Se você não lembra como fazero download, basta [ver aqui](#DownloadBKE).
+Se você não lembra como fazer o download, basta [ver aqui](#DownloadBKE).
 
 ### Como utilizar o projeto <a name="UsarFTE"></a>
 
